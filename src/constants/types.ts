@@ -1,0 +1,1 @@
+export type ErrorObj = Record<string,string>;
