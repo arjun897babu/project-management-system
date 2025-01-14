@@ -86,7 +86,7 @@ export class AuthMiddleWare {
 
                 if (resourceUserId !== userId) {
                     throw new CustomError(
-                        'forbidden: only project owner can update',
+                        'forbidden: only project owner have the permission',
                         HttpStatusCode.FORBIDDEN,
                         resource
                     );

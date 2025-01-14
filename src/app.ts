@@ -18,7 +18,7 @@ connectDb();
 
 App.use('/api/user', userAuthRoutes);
 App.use('/api/project', projectRoutes);
-App.use('/api/tasks', taskRoutes);
+App.use('/api/task', taskRoutes);
 
 App.use(errorHandler);
 App.use("*", wildCardMiddleware);
