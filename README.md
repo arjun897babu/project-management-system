@@ -40,3 +40,54 @@ process.env.NODE_ENV = development
 ```
 npm run dev
 ```
+
+# Database Schema and Relationships
+
+This document outlines the database schema for the application and its relationships between different models.
+
+---
+
+## **User Model**
+
+- **uId**: Primary key
+- **name**: User's name
+- **email**: User's email address (unique)
+- **password**: Encrypted password for authentication
+
+### Relationships:
+- **User -> Project**: Many-to-many (A user can be part of multiple projects, and a project can have multiple users).
+- **User -> Task**: One-to-many (A user can have multiple tasks ).
+
+---
+
+## **Project Model**
+
+- **uId**: Primary key
+- **name**: Project name
+- **description**: A brief description of the project
+- **userId**: Foreign key to the User model (project owner)
+
+### Relationships:
+- **Project -> Task**: One-to-many (A project can have multiple tasks).
+- **Project -> User**: Many-to-many 
+
+---
+
+## **Task Model**
+
+- **uId**: Primary key
+- **name**: Task title
+- **description**: Task description
+- **status**: Current status of the task (e.g., `todo`, `in progress`, `done`)
+- **projectId**: Foreign key to the Project model
+- **userId**: Foreign key to the User model (task owner)
+
+### Relationships:
+- **Task -> Project**: Many-to-one (Each task belongs to one project).
+- **Task -> User **: Many-to-one (Each task is created by one user).
+---
+
+## Conclusion
+
+This schema defines the structure and relationships between users, projects, and tasks. Each model is connected through foreign keys, allowing for robust querying and data management. The relationships are designed to ensure flexibility and scalability for the application.
+
