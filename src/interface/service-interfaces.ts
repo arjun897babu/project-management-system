@@ -27,7 +27,7 @@ export interface ITaskService {
     deleteTask(taskId: number): Promise<IResponse>;
 }
 export interface IProjectService {
-    createProject(payload: IProjectCreatePayload): Promise<IGetProjectResponse>;
+    createProject(payload: IProjectCreatePayload): Promise<IResponse>;
     updateProject(payload: IUpdateProjectPayload): Promise<IResponse>;
     getProject(payload: IProjectRUD): Promise<IGetProjectResponse>;
     getAllProject(userId: number): Promise<IGetProjectResponse>;

@@ -33,7 +33,7 @@ const passwordSchema = z.object({
 
 
 
-const resourceSchema = z.object({
+export const resourceSchema = z.object({
     description: z
         .string()
         .nonempty(generateRequiredError('description'))
@@ -45,7 +45,7 @@ const resourceSchema = z.object({
 });
 
 
-const taskStatusSchema = z.object({
+export const taskStatusSchema = z.object({
     status: z.enum([TaskStatus.TO_DO, TaskStatus.In_Progress, TaskStatus.Done], {
         errorMap: () => ({ message: 'Invalid task status' }),
     }),

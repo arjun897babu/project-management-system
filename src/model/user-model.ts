@@ -45,8 +45,8 @@ const User = sequelize.define<Model<IUser, Pick<IUser, 'email' | 'password' | 'n
 );
 
 //user -> project [many-to-many relation]
-User.belongsToMany(Project, { through: 'user_projects', foreignKey: 'userId', otherKey: 'projectId', timestamps: true, as: 'project' })
-Project.belongsToMany(User, { through: 'user_projects', foreignKey: 'projectId', otherKey: 'userId', timestamps: true, as: 'user' })
+User.belongsToMany(Project, { through: 'user_projects', foreignKey: 'userId', otherKey: 'projectId', timestamps: true })
+Project.belongsToMany(User, { through: 'user_projects', foreignKey: 'projectId', otherKey: 'userId', timestamps: true  })
 
 //user -> task [one-to-many relation]
 User.hasMany(Task, { foreignKey: 'assignedTo' })

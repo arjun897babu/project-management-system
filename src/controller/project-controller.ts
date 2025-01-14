@@ -34,7 +34,7 @@ export class ProjectController {
                 throw new CustomError('bad request', HttpStatusCode.BAD_REQUEST, 'projectId')
             }
             const response = await this.projectService.getProject({ userId, uId: projectId });
-            return res.json(HttpStatusCode.OK).json(response)
+            return res.status(HttpStatusCode.OK).json(response)
 
         } catch (error) {
             next(error)

@@ -9,7 +9,7 @@ import { CustomError } from "../utils/custom-error";
 
 export class ProjectService implements IProjectService {
 
-    async createProject(payload: IProjectCreatePayload): Promise<IGetProjectResponse> {
+    async createProject(payload: IProjectCreatePayload): Promise<IResponse> {
         try {
             const project = await Project.create(payload);
             const user = await User.findByPk(payload.userId) as any
@@ -18,10 +18,7 @@ export class ProjectService implements IProjectService {
             }
             return {
                 status: ResponseStatus.SUCCESS,
-                message: 'project fetched successfully',
-                data: {
-                    project: project.dataValues
-                }
+                message: 'project created successfully',
             }
         } catch (error) {
             throw error
