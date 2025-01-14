@@ -1,8 +1,9 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/db-connection";
 import { IProject } from "../interface/model-interface";
+import Task from "./task-model";
 
-const Project = sequelize.define<Model<IProject, Omit<IProject, 'createdAt' | 'updatedAt' | 'uId'>>>(
+const Project = sequelize.define<Model<IProject, Pick<IProject, 'description' | 'name' | 'userId'>>>(
     "Project",
     {
         uId: {
@@ -20,13 +21,14 @@ const Project = sequelize.define<Model<IProject, Omit<IProject, 'createdAt' | 'u
             type: DataTypes.STRING,
             allowNull: false,
         },
-        ownerId: {
+        userId: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
     },
 
     {
+        tableName:'projects',
         timestamps: true,
         hooks: {
             beforeSave: (projects) => {
@@ -36,5 +38,10 @@ const Project = sequelize.define<Model<IProject, Omit<IProject, 'createdAt' | 'u
         },
     }
 );
+
+
+//project -> task [one-to-many relation]
+Project.hasMany(Task, { foreignKey: 'projectId' })
+Task.belongsTo(Project, { foreignKey: 'projectId' });
 
 export default Project;

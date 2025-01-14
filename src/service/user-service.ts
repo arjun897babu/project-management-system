@@ -1,14 +1,13 @@
-import { Model } from "sequelize";
 import { HttpStatusCode, ResponseStatus } from "../constants/enum";
 import { ISignUpPayload, ILoginPayload } from "../interface/payload-interface";
-import { ILoginResponse, IResponse } from "../interface/response-interface";
-import { IBcrypt, IJWT, IUserAuth } from "../interface/service-interfaces";
+import { IGetUserResponse, ILoginResponse, IResponse } from "../interface/response-interface";
+import { IBcrypt, IJWT, IUserService } from "../interface/service-interfaces";
 import User from "../model/user-model";
 import Users from "../model/user-model";
 import { CustomError } from "../utils/custom-error";
-import { IUser } from "../interface/model-interface";
 
-export class UserAuth implements IUserAuth {
+export class UserAuth implements IUserService {
+
     jwt: IJWT
     bcrypt: IBcrypt
     constructor(jwt: IJWT, bcrypt: IBcrypt) {
@@ -49,8 +48,8 @@ export class UserAuth implements IUserAuth {
             throw error
         }
     }
-    async signUp(payload: ISignUpPayload): Promise<IResponse> {
 
+    async signUp(payload: ISignUpPayload): Promise<IResponse> {
 
         try {
             const hashedPassword = await this.bcrypt.hash(payload.password);
@@ -68,6 +67,34 @@ export class UserAuth implements IUserAuth {
 
         } catch (error) {
             throw error
+        }
+    }
+
+    async getUser(userId: number): Promise<IGetUserResponse> {
+        try {
+            const user = await User.findByPk(userId, { attributes: ['email', 'uId', 'name'] });
+            if (!user) {
+                throw new CustomError('user not found', HttpStatusCode.BAD_REQUEST, 'email')
+            }
+            return {
+                status: ResponseStatus.SUCCESS,
+                message: 'data fetched successfully',
+                data: {
+                    user: user.dataValues
+                }
+            }
+        } catch (error) {
+            throw error
+        }
+    }
+    async getAllUsers(): Promise<IGetUserResponse> {
+        const users = await Users.findAll({ attributes: ['email', 'uId', 'name'] });
+        return {
+            status: ResponseStatus.SUCCESS,
+            message: 'user data fetched successfully',
+            data: {
+                user: users.map((user) => user.dataValues)
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import morgan from "morgan";
 import { config } from 'dotenv'
 config();
@@ -6,6 +6,8 @@ import { serverConfig } from './constants/server-config'
 import { connectDb } from "./config/db-connection";
 import { errorHandler, wildCardMiddleware } from "./middleware/error-middleware";
 import { userAuthRoutes } from "./routes/user-auth-routes";
+import { projectRoutes } from "./routes/project-routes";
+import { taskRoutes } from "./routes/task-routes";
 
 const App = express();
 App.use(express.json());
@@ -14,9 +16,9 @@ App.use(morgan("dev"));
 
 connectDb();
 
-App.get('/favicon.ico', (req: Request, res: Response) => { res.status(204) });
-
-App.use('/api/user', userAuthRoutes)
+App.use('/api/user', userAuthRoutes);
+App.use('/api/project', projectRoutes);
+App.use('/api/tasks', taskRoutes);
 
 App.use(errorHandler);
 App.use("*", wildCardMiddleware);

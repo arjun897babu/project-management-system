@@ -14,7 +14,7 @@ export interface IProject extends ITimeStamps {
     uId: number;
     name: string;
     description: string;
-    ownerId: number
+    userId: number //owner
 }
 
 export interface ITask extends ITimeStamps {
@@ -23,5 +23,5 @@ export interface ITask extends ITimeStamps {
     description: string;
     status: TaskStatus;
     projectId: number;
-    assignedTo: number;
+    userId:number //owner
 }

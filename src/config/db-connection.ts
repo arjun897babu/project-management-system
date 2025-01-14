@@ -13,23 +13,6 @@ export const sequelize = new Sequelize(
     }
 );
 
-import Projects from '../model/project-model'
-import Tasks from '../model/task-model'
-import Users from '../model/user-model'
-
-
-//user -> project [many-to-many relation]
-Users.belongsToMany(Projects, { through: 'UserProjects', foreignKey: 'userId', timestamps: true })
-Projects.belongsToMany(Users, { through: 'UserProjects', foreignKey: 'projectId', timestamps: true })
-
-//project -> task [one-to-many relation]
-Projects.hasMany(Tasks, { foreignKey: 'projectId' })
-Tasks.belongsTo(Projects, { foreignKey: 'projectId' })
-
-//user -> task [one-to-many relation]
-Users.hasMany(Tasks, { foreignKey: 'assignedTo' })
-Tasks.belongsTo(Users, { foreignKey: 'assignedTo' })
-
 
 export const connectDb = async () => {
     try {

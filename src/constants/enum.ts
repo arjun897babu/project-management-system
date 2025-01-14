@@ -20,3 +20,8 @@ export enum TaskStatus {
     In_Progress = 'In Progress',
     Done = 'Done'
 }
+
+export enum Role{
+    OWNER='owner',
+    CONTRIBUTER='contributer'
+}
