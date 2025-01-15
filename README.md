@@ -6,7 +6,13 @@ This is a project management system built with Node.js, Express, and Sequelize O
 
 ---
 
+## [API Documentation](https://documenter.getpostman.com/view/30767357/2sAYQXoseT)
 
+To run the API in Postman, replace variable `{{baseURL}}` with:
+- `http://localhost:[your_port]` if running locally.
+- `https://project-management-system-ksxt.onrender.com` if accessing the deployed version.
+
+### [Live link](https://project-management-system-ksxt.onrender.com)
 
 ## Setup Instructions
 
@@ -86,8 +92,3 @@ This document outlines the database schema for the application and its relations
 - **Task -> Project**: Many-to-one (Each task belongs to one project).
 - **Task -> User **: Many-to-one (Each task is created by one user).
 ---
-
-## Conclusion
-
-This schema defines the structure and relationships between users, projects, and tasks. Each model is connected through foreign keys, allowing for robust querying and data management. The relationships are designed to ensure flexibility and scalability for the application.
-
