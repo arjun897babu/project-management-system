@@ -9,10 +9,7 @@ This is a project management system built with Node.js, Express, and Sequelize O
 ## [API Documentation](https://documenter.getpostman.com/view/30767357/2sAYQXoseT)
 
 To run the API in Postman, replace variable `{{baseURL}}` with:
-- `http://localhost:[your_port]` if running locally.
-- `https://project-management-system-ksxt.onrender.com` if accessing the deployed version.
-
-### [Live link](https://project-management-system-ksxt.onrender.com)
+- `http://localhost:[your_port]`
 
 ## Setup Instructions
 
